@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Alert } from "react-native";
 import LoginScreen from "./presenter";
 
@@ -8,6 +9,10 @@ class Container extends Component {
         password: "",
         isSubmitting: false
     };
+    static propTypes = {
+        login: PropTypes.func.isRequired,
+        fbLogin: PropTypes.func.isRequired
+    };
     render() {
         return (
             <LoginScreen
@@ -15,6 +20,7 @@ class Container extends Component {
                 changeUserName={this._changeUserName}
                 changePassword={this._changePassword}
                 submit={this._submit}
+                fbLogin={this._handleFBLogin}
             />
         );
     }
@@ -44,6 +50,15 @@ class Container extends Component {
             } else {
                 Alert.alert("All fields are required");
             }
+        }
+    };
+    _handleFBLogin = async () => {
+        const { fbLogin } = this.props;
+        const facebookResult = await fbLogin();
+        this.setState({ isSubmitting: true });
+
+        if (!facebookResult) {
+            this.setState({ isSubmitting: false });
         }
     };
 }

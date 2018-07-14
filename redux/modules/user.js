@@ -1,6 +1,7 @@
 // Imports
-import { API_URL } from "../../constants";
+import { API_URL, FB_APP_ID } from "../../constants";
 import { AsyncStorage } from "react-native";
+import { Facebook } from "expo";
 
 // Actions
 const LOG_IN = "LOG_IN";
@@ -30,7 +31,7 @@ function logout() {
 
 // API Actions
 function login(username, password) {
-    return dispatch => {
+    return async dispatch => {
         return fetch(`${API_URL}/rest-auth/login/`, {
             method: "POST",
             headers: {
@@ -43,10 +44,6 @@ function login(username, password) {
         })
             .then(response => response.json())
             .then(json => {
-                if (json.token) {
-                }
-                if (json.user) {
-                }
                 if (json.user && json.token) {
                     dispatch(setLogIn(json.token));
                     dispatch(setUser(json.user));
@@ -56,6 +53,39 @@ function login(username, password) {
                     return false;
                 }
             });
+    };
+}
+
+function facebookLogin() {
+    return async dispatch => {
+        const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+            FB_APP_ID,
+            {
+                permissions: ["public_profile", "email"]
+            }
+        );
+        if (type === "success") {
+            return fetch(`${API_URL}/users/login/facebook/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    access_token: token
+                })
+            })
+                .then(response => response.json())
+                .then(json => {
+                    if (json.user && json.token) {
+                        dispatch(setLogIn(json.token));
+                        dispatch(setUser(json.user));
+
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+        }
     };
 }
 
@@ -109,7 +139,8 @@ async function applyLogOut(state, action) {
 
 // Exports
 const actionCreators = {
-    login
+    login,
+    facebookLogin
 };
 
 export { actionCreators };
