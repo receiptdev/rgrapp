@@ -9,7 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const TabsNavigation = createBottomTabNavigator(
     {
-        Home: {
+        Feed: {
             screen: HomeRoute,
             navigationOptions: {
                 tabBarIcon: ({ focused }) => (
@@ -35,15 +35,19 @@ const TabsNavigation = createBottomTabNavigator(
         },
         AddPhoto: {
             screen: View,
-            navigationOptions: {
+            navigationOptions: ({ navigation }) => ({
                 tabBarIcon: ({ focused }) => (
                     <Ionicons
                         name={"ios-add-circle-outline"}
                         size={30}
                         color={"black"}
                     />
-                )
-            }
+                ),
+                tabBarOnPress: () => {
+                    // Works!
+                    navigation.navigate("TakePhoto");
+                }
+            })
         },
         Notifications: {
             screen: NotificationsRoute,
@@ -70,6 +74,7 @@ const TabsNavigation = createBottomTabNavigator(
             }
         }
     },
+
     {
         tabBarOptions: {
             showLabel: false,

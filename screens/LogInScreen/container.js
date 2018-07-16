@@ -54,8 +54,8 @@ class Container extends Component {
     };
     _handleFBLogin = async () => {
         const { fbLogin } = this.props;
-        const facebookResult = await fbLogin();
         this.setState({ isSubmitting: true });
+        const facebookResult = await fbLogin();
 
         if (!facebookResult) {
             this.setState({ isSubmitting: false });
