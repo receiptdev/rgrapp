@@ -8,7 +8,7 @@ class Container extends Component {
         getFeed: PropTypes.func.isRequired
     };
     state = {
-        isFetching: true
+        isFetching: false
     };
     componentWillReceiveProps = nextProps => {
         if (nextProps.feed) {
@@ -18,8 +18,21 @@ class Container extends Component {
         }
     };
     render() {
-        return <FeedScreen {...this.props} />;
+        return (
+            <FeedScreen
+                {...this.props}
+                {...this.state}
+                refresh={this._refresh}
+            />
+        );
     }
+    _refresh = () => {
+        const { getFeed } = this.props;
+        this.setState({
+            isFetching: true
+        });
+        getFeed();
+    };
 }
 
 export default Container;
