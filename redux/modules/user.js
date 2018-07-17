@@ -106,11 +106,12 @@ function getNotifications() {
             user: { token }
         } = getState();
         fetch(`${API_URL}/notifications/`, {
-            header: {
+            headers: {
                 Authorization: `JWT ${token}`
             }
         })
             .then(response => {
+                console.log(response);
                 if (response.status === 401) {
                     dispatch(logOut());
                 } else {
@@ -132,11 +133,12 @@ function getOwnProfile() {
             }
         } = getState();
         fetch(`${API_URL}/users/${username}/`, {
-            header: {
+            headers: {
                 Authorization: `JWT ${token}`
             }
         })
             .then(response => {
+                console.log(response);
                 if (response.status === 401) {
                     dispatch(logOut());
                 } else {

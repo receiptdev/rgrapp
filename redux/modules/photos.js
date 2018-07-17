@@ -28,11 +28,12 @@ function getFeed() {
             user: { token }
         } = getState();
         fetch(`${API_URL}/images/`, {
-            header: {
+            headers: {
                 Authorization: `JWT ${token}`
             }
         })
             .then(response => {
+                console.log("getFeed", response);
                 if (response.status === 401) {
                     dispatch(userActions.logOut());
                 } else {
@@ -51,11 +52,12 @@ function getSearch() {
             user: { token }
         } = getState();
         fetch(`${API_URL}/images/search/`, {
-            header: {
+            headers: {
                 Authorization: `JWT ${token}`
             }
         })
             .then(response => {
+                console.log("getSearch", response);
                 if (response.status === 401) {
                     dispatch(userActions.logOut());
                 } else {
