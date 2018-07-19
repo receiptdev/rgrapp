@@ -111,7 +111,7 @@ function getNotifications() {
             }
         })
             .then(response => {
-                console.log(response);
+                //console.log(response);
                 if (response.status === 401) {
                     dispatch(logOut());
                 } else {
@@ -138,7 +138,7 @@ function getOwnProfile() {
             }
         })
             .then(response => {
-                console.log(response);
+                //console.log(response);
                 if (response.status === 401) {
                     dispatch(logOut());
                 } else {

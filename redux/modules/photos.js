@@ -33,7 +33,7 @@ function getFeed() {
             }
         })
             .then(response => {
-                console.log("getFeed", response);
+                //console.log("getFeed", response);
                 if (response.status === 401) {
                     dispatch(userActions.logOut());
                 } else {
@@ -57,7 +57,7 @@ function getSearch() {
             }
         })
             .then(response => {
-                console.log("getSearch", response);
+                //console.log("getSearch", response);
                 if (response.status === 401) {
                     dispatch(userActions.logOut());
                 } else {
