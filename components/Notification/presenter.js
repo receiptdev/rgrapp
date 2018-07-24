@@ -16,7 +16,7 @@ const { width, height } = Dimensions.get("window");
 const Notification = props => (
     <View style={styles.container}>
         <TouchableOpacity
-            onPress={() =>
+            onPressOut={() =>
                 props.navigation.navigate("ProfileDetail", {
                     user: props.creator
                 })
@@ -26,9 +26,7 @@ const Notification = props => (
                 <Image
                     source={
                         props.creator.profile_image
-                            ? {
-                                  uri: props.creator.profile_image
-                              }
+                            ? { uri: props.creator.profile_image }
                             : require("../../assets/images/noPhoto.jpg")
                     }
                     style={styles.avatar}
