@@ -1,5 +1,5 @@
 import { createStackNavigator } from "react-navigation";
-import TakePhotoScreen from "../screens/TakePhotoScreen";
+import AddPhotoNavigation from "./AddPhotoNavigation";
 import TabsNavigation from "./TabsNavigation";
 
 const RootNavigation = createStackNavigator(
@@ -11,7 +11,7 @@ const RootNavigation = createStackNavigator(
             }
         },
         TakePhoto: {
-            screen: TakePhotoScreen,
+            screen: AddPhotoNavigation,
             navigationOptions: {
                 header: null
             }
