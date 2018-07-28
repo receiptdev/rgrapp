@@ -18,9 +18,6 @@ const AddPhotoNavigation = createBottomTabNavigator(
         }
     },
     {
-        tabBarPosition: "top",
-        swipeEnabled: true,
-        animationEnabled: true,
         tabBarOptions: {
             showLabel: true,
             upperCaseLabel: true,
